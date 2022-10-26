@@ -5,4 +5,6 @@ from ..models import Store
 class StoreView():
 
     def index(req):
-        return HttpResponse('loja')
+        return render(req, "store/index.html", {
+            "id": 15
+        })
