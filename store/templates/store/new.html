@@ -1,0 +1,141 @@
+{% extends "partials/template.main.html" %}
+
+{% block content %}
+
+{% include "partials/template.nav.html" %}
+<div class="container-fluid eFiscal-container">
+    <div class="eFiscal-container-form">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="display-1 eFiscal-container-form-title">
+                    <i class="fa-solid fa-store"></i> Minha Empresa
+                </h1>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="corporateName" placeholder="corporateName" autocomplete="off">
+                            <label for="corporateName">Razão Social</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="brandName" placeholder="brandName" autocomplete="off">
+                            <label for="brandName">Nome Fantasia</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="document" placeholder="document" autocomplete="off">
+                            <label for="document">CPF/CNPJ</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="ie" placeholder="ie" autocomplete="off">
+                            <label for="ie">IE</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="postalCode" placeholder="postalCode" autocomplete="off">
+                            <label for="postalCode">CEP</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-floating">
+                            <select class="form-select" id="state">
+                                {% for state in states %}
+                                    <option value="{{ state.0 }}">{{ state.1 }}</option>
+                                {% endfor %}
+                            </select>
+                            <label for="state">Estado</label>
+                        </div>
+                    </div>
+                    <div class="col-md-7 mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="city" placeholder="city" autocomplete="off">
+                            <label for="city">Cidade</label>
+                        </div>
+                    </div>
+                    <div class="col-md-10 mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="street" placeholder="street" autocomplete="off">
+                            <label for="street">Endereço</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="number" placeholder="number" autocomplete="off">
+                            <label for="number">Número</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="phone" placeholder="phone" autocomplete="off">
+                            <label for="phone">Telefone</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="cellPhone" placeholder="cellPhone" autocomplete="off">
+                            <label for="cellPhone">Celular</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="email" placeholder="email" autocomplete="off">
+                            <label for="email">Email</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input type="color" class="form-control" value="#1fb7a9" id="primaryColor" placeholder="primaryColor" autocomplete="off">
+                            <label for="primaryColor">Cor Primária</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input type="color" class="form-control" value="#FFFFFF" id="secondaryColor" placeholder="secondaryColor" autocomplete="off">
+                            <label for="secondaryColor">Cor Secundária</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="terms" id="terms" style="height: 220px"></textarea>
+                            <label for="terms">Termos</label>
+                          </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-success btn-lg btn-rounded" type="button"><i class="fa-solid fa-floppy-disk"></i> Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script>
+
+    $(document).ready(function(){
+        $('#phone').mask('(00) 0000-0000');
+
+        var SPMaskBehavior = function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+        },
+        spOptions = {
+            onKeyPress: function(val, e, field, options) {
+                field.mask(SPMaskBehavior.apply({}, arguments), options);
+            }
+        };
+        $('#cellPhone').mask(SPMaskBehavior, spOptions);
+
+    })
+
+</script> 
+{% endblock script %}

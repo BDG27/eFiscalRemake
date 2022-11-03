@@ -16,11 +16,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls.static import static
+from django.conf import settings
 
-urlpatterns = [
-    path('orcamento/', include('budget.urls')),
-    path('loja/', include('store.urls')),
+from store import views
+from .views import MainView
+
+urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) +  [
+    path('login/', MainView.login, name='dashboard_login'),
+    path('login_authenticate/', MainView.login_authenticate, name='dashboard_login_authenticate'),
+    path('dashboard/', include('store.urls')),
     path('admin/', admin.site.urls),
 ]
 
 # urlpatterns += staticfiles_urlpatterns()
+
+# Configure Admin Titles
+admin.site.site_header = "e-Fiscal - Admin"
+admin.site.site_title = "Dashboard"
+admin.site.index_title = "Home"

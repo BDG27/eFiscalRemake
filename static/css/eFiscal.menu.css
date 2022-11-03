@@ -1,0 +1,11 @@
+#eFiscal-nav{
+}
+#eFiscal-components-page{
+    padding: 0 10rem;
+    padding-top: 2rem;
+}
+.eFiscal-components-page-title{
+    display: flex;
+    flex-shrink: inherit;
+    background-color: aquamarine;
+}
