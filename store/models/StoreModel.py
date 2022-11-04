@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from . import State, Status, PaymentStatus
 
 class Store(models.Model):
@@ -14,8 +15,6 @@ class Store(models.Model):
     number = models.CharField(max_length=50)
     phone = models.CharField(max_length=50) 
     cellPhone = models.CharField(max_length=50) 
-    email = models.CharField(max_length=255, unique=True)
-    password = models.CharField(max_length=255) 
     slugify = models.CharField(max_length=255) 
     primaryColor = models.CharField(max_length=50) 
     secondaryColor = models.CharField(max_length=50) 
@@ -23,6 +22,7 @@ class Store(models.Model):
     terms = models.TextField(null=True) 
     status = models.CharField(max_length=50, choices=Status.choices, default=Status.ATIVO)   
     paymentStatus = models.CharField(max_length=50, choices=PaymentStatus.choices, default=PaymentStatus.PAGO) 
+    user = models.ForeignKey(User, null=False, on_delete=models.RESTRICT)
 
     def __str__(self):
         return self.brandName

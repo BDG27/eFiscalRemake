@@ -2,3 +2,4 @@ django
 django-dotenv
 django-admin-list-filter
 django-admin-list-filter-dropdown
+validate-docbr

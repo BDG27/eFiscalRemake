@@ -1,11 +1,53 @@
-#eFiscal-nav{
+*{
+    margin: 0;
+    padding: 0;
 }
-#eFiscal-components-page{
+body{
+    background-color: #f3f3f3;
+}
+a{
+    text-decoration: none;
+}
+.eFiscal-container{
+    margin-top: 5rem;
+}
+.eFiscal-container-form{
     padding: 0 10rem;
-    padding-top: 2rem;
 }
-.eFiscal-components-page-title{
-    display: flex;
-    flex-shrink: inherit;
-    background-color: aquamarine;
+.eFiscal-container-form-title{
+    font-size: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (max-width: 576px) {
+    .eFiscal-container-form{
+        padding: 0;
+    }
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (max-width: 768px) {
+    .eFiscal-container-form{
+        padding: 0 2rem;
+    }
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (max-width: 992px) {
+    
+}
+
+/* // X-Large devices (large desktops, 1200px and up) */
+@media (max-width: 1200px) {
+    .eFiscal-container-form{
+        padding: 0 6rem;
+    }
+}
+
+/* // XX-Large devices (larger desktops, 1400px and up) */
+@media (max-width: 1400px) {
+
 }

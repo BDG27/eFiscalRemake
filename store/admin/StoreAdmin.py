@@ -4,9 +4,9 @@ from admin_auto_filters.filters import AutocompleteFilter, AutocompleteFilterFac
 from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter, ChoiceDropdownFilter
 
 class StoreAdmin(admin.ModelAdmin):
-    list_display = ('brandName', 'document', 'email', 'state', 'status', 'paymentStatus')
-    list_display_links = ('brandName', 'document', 'email')
-    search_fields = ['brandName', 'document', 'email', 'state']
+    list_display = ('brandName', 'document', 'user','state', 'status', 'paymentStatus')
+    list_display_links = ('brandName', 'document', 'user')
+    search_fields = ['brandName', 'document', 'user', 'state']
     list_filter = [
         # AutocompleteFilterFactory('Estado', 'state', '', True), 
         ('state', ChoiceDropdownFilter),

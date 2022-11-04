@@ -25,7 +25,7 @@ from .views import MainView
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) +  [
     path('login/', MainView.login, name='dashboard_login'),
     path('login_authenticate/', MainView.login_authenticate, name='dashboard_login_authenticate'),
-    path('dashboard/', include('store.urls')),
+    path('', include('store.urls')),
     path('admin/', admin.site.urls),
 ]
 
