@@ -1,22 +1,14 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.conf import settings
-# from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from store.models import State
+from .UtilsView import UtilsView
 import json
 
 class MainView():
 
-    def __CEO():
-        return {
-            "CEO": {
-                "pageTitle": settings.CEO_APP_NAME
-            }
-        }
-
     def login(req):
-        CEO = MainView.__CEO()
+        CEO = UtilsView.CEO()
         return render(req, "dashboard/login.html", {
             "CEO": {
                 "pageTitle": CEO['CEO']['pageTitle']+"Login"

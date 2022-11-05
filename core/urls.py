@@ -26,6 +26,7 @@ urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) +  [
     path('login/', MainView.login, name='dashboard_login'),
     path('login_authenticate/', MainView.login_authenticate, name='dashboard_login_authenticate'),
     path('', include('store.urls')),
+    path('', include('client.urls')),
     path('admin/', admin.site.urls),
 ]
 

@@ -6,6 +6,8 @@ from core.views import UtilsView
 from validate_docbr import CPF, CNPJ
 import os, json
 
+CEO = UtilsView.CEO()
+
 class StoreView():
 
     def index(req):
@@ -14,13 +16,16 @@ class StoreView():
         })
 
     @login_required
-    def loja(req):
+    def store(req):
         if(req.method == 'GET'):
             try: 
                 user = req.user
                 userEmail = user.email
                 store = Store.objects.get(user_id = user.id)
                 return render(req, "store/view.html", {
+                    "CEO": {
+                        "pageTitle": CEO['CEO']['pageTitle']+"Minha Empresa"
+                    },
                     "store": store,
                     "userEmail": userEmail,
                     "states": State.choices,
@@ -31,7 +36,7 @@ class StoreView():
                 return redirect('dashboard_login')
 
     @login_required
-    def loja_update(req):
+    def store_update(req):
         if(req.method == 'PUT'):
             try:
                 data = json.loads(req.body.decode('utf-8'))
@@ -43,6 +48,7 @@ class StoreView():
                 postalCode = data['postalCode']
                 state = data['state']
                 city = data['city']
+                district = data['district']
                 street = data['street']
                 number = data['number']
                 phone = data['phone']
@@ -69,6 +75,7 @@ class StoreView():
                 if(len(postalCode) < 9): return JsonResponse({"success": False, "message": 'CEP inválido'})
                 if(len(state) < 2): return JsonResponse({"success": False, "message": 'Estado inválido'})
                 if(len(city) < 2): return JsonResponse({"success": False, "message": 'Informe uma cidade'})
+                if(len(district) < 2): return JsonResponse({"success": False, "message": 'Informe um bairro'})
                 if(len(street) < 4): return JsonResponse({"success": False, "message": 'Informe um endereço'})
                 if(len(number) < 1): return JsonResponse({"success": False, "message": 'Informe um número'})
                 if(len(phone) < 11): return JsonResponse({"success": False, "message": 'Telefone inválido'})
@@ -77,19 +84,25 @@ class StoreView():
                 if(len(primaryColor) < 2): return JsonResponse({"success": False, "message": 'Cor Primária Inválida'})
                 if(len(secondaryColor) < 2): return JsonResponse({"success": False, "message": 'Cor Secundária Inválida'})
 
+                #Atualiza os dados do usuario
+                user = req.user
+                user.email = email.lower()
+                user.save()
+
+                # Atualiza os dados da empresa
                 store = store[0]
-                store.corporateName = corporateName
-                store.brandName = brandName
+                store.corporateName = corporateName.title()
+                store.brandName = brandName.title()
                 store.document = document
                 store.ie = ie
                 store.postalCode = postalCode
                 store.state = state
                 store.city = city
+                store.district = district
                 store.street = street
                 store.number = number
                 store.phone = phone
                 store.cellPhone = cellPhone
-                store.email = email
                 store.primaryColor = primaryColor
                 store.secondaryColor = secondaryColor
                 store.terms = terms

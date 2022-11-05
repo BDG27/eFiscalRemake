@@ -53,10 +53,16 @@
                             <label for="state">Estado</label>
                         </div>
                     </div>
-                    <div class="col-md-7 mb-3">
+                    <div class="col-md-4 mb-3">
                         <div class="form-floating">
                             <input type="text" class="form-control" value="{{ store.city }}" id="city" placeholder="city" autocomplete="off">
                             <label for="city">Cidade</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" value="{{ store.district }}" id="district" placeholder="district" autocomplete="off">
+                            <label for="district">Bairro</label>
                         </div>
                     </div>
                     <div class="col-md-10 mb-3">
@@ -109,8 +115,8 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
-                <div class="d-grid gap-2 col-6 mx-auto">
+            <div class="card-footer mb-4">
+                <div class="d-grid gap-2 col-8 col-md-5 mx-auto">
                     <button class="btn btn-success btn-lg btn-rounded" onclick="store_update('{{ store.id }}')" type="button">
                         <i class="fa-solid fa-floppy-disk"></i> Salvar
                     </button>
@@ -145,7 +151,7 @@
         
         axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
         axios.defaults.xsrfCookieName = "csrftoken";
-        axios.put(AXIOS_URL+`/loja`, {
+        axios.put(AXIOS_URL+`/store`, {
             storeId: storeId,
             corporateName: $('#corporateName').val(),
             brandName: $('#brandName').val(),
@@ -154,6 +160,7 @@
             postalCode: $('#postalCode').val(),
             state: $('#state').val(),
             city: $('#city').val(),
+            district: $('#district').val(),
             street: $('#street').val(),
             number: $('#number').val(),
             phone: $('#phone').val(),
