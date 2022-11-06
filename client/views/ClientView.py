@@ -28,6 +28,18 @@ class ClientView():
                 print(error)
                 return redirect('dashboard_login')
 
+    def client_findByName(req, name):
+        if(req.method == 'GET'):
+            try:
+                clients = Client.objects.filter(corporateName__icontains=name)
+                clientList = []
+                for client in clients:
+                    clientList.append({"id": client.id, "name": client.corporateName})
+
+                return JsonResponse({"success": True, "clientList": clientList})
+            except Exception as error:
+                return JsonResponse({"success": False, "message": str(error)})
+
     def client_update(req):
         if(req.method == 'PUT'):
             try:

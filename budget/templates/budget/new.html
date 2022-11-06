@@ -1,0 +1,269 @@
+{% extends "partials/template.main.html" %}
+
+{% block content %}
+
+{% include "partials/template.nav.html" %}
+<div class="container-fluid eFiscal-container">
+    <div class="eFiscal-container-form">
+        <!-- Seus dados -->
+        <div class="card mb-3 shadow-4-strong">
+            <div class="card-header">
+                <h1 class="display-1 eFiscal-container-form-title">
+                    <i class="fa-solid fa-store"></i> Seus Dados
+                </h1>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                value="{{ store.brandName | default:'' }}" 
+                                id="budgetNumber" 
+                                placeholder="budgetNumber" 
+                                autocomplete="off"
+                                disabled
+                            >
+                            <label for="budgetNumber">Nome Fantasia</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                value="{{ store.document }}" 
+                                id="certificate" 
+                                placeholder="certificate" 
+                                autocomplete="off"
+                                disabled 
+                            >
+                            <label for="certificate">CPF/CNPJ</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="form-floating">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                value="{{ store.street }}, {{ store.number }} - {{ store.district }} - {{ store.city }}/{{ store.state }}" 
+                                id="certificate" 
+                                placeholder="certificate" 
+                                autocomplete="off"
+                                disabled 
+                            >
+                            <label for="certificate">Endereço</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Dados do cliente -->
+        <div class="card mb-3 shadow-4-strong">
+            <div class="card-header">
+                <h1 class="display-1 eFiscal-container-form-title">
+                    <i class="fa-solid fa-user"></i> Dados do Cliente
+                </h1>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="clientName" 
+                                placeholder="clientName" 
+                                autocomplete="off"
+                            >
+                            <label for="clientName">Nome Cliente</label>
+                            <div class="groupSelect">
+                                <div class="groupSelect-item">
+                                    <i class="fa-solid fa-user"></i> Alvaro
+                                </div>
+                                <div class="groupSelect-item">
+                                    <i class="fa-solid fa-user"></i> Alvaro
+                                </div>
+                                <div class="groupSelect-item">
+                                    <i class="fa-solid fa-user"></i> Alvaro
+                                </div>
+                                <div class="groupSelect-item">
+                                    <i class="fa-solid fa-user"></i> Alvaro
+                                </div>
+                                <div class="groupSelect-item">
+                                    <i class="fa-solid fa-user"></i> Alvaro
+                                </div>
+                                <div class="groupSelect-item">
+                                    <i class="fa-solid fa-user"></i> Alvaro
+                                </div>
+                                <div class="groupSelect-item">
+                                    <i class="fa-solid fa-user"></i> Alvaro
+                                </div>
+                                <div class="groupSelect-item">
+                                    <i class="fa-solid fa-user"></i> Alvaro
+                                </div>
+                                <div class="groupSelect-item">
+                                    <i class="fa-solid fa-user"></i> Alvaro
+                                </div>
+                                <div class="groupSelect-item">
+                                    <i class="fa-solid fa-user"></i> Alvaro
+                                </div>
+                                <div class="groupSelect-item">
+                                    <i class="fa-solid fa-user"></i> Alvaro
+                                </div>
+                                <div class="groupSelect-item">
+                                    <i class="fa-solid fa-user"></i> Alvaro
+                                </div>
+                                <div class="groupSelect-item">
+                                    <i class="fa-solid fa-user"></i> Alvaro
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="clientDocument" 
+                                placeholder="clientDocument" 
+                                autocomplete="off"
+                                disabled 
+                            >
+                            <label for="clientDocument">CPF/CNPJ</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="form-floating">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="clientAddress" 
+                                placeholder="clientAddress" 
+                                autocomplete="off"
+                                disabled 
+                            >
+                            <label for="clientAddress">Endereço</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Dados do orçamento -->
+        <div class="card shadow-4-strong">
+            <div class="card-header">
+                <h1 class="display-1 eFiscal-container-form-title">
+                    <i class="fa-solid fa-file-invoice"></i> Novo Orçamento
+                </h1>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <div class="form-floating">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                value="{{ client.corporateName | default:'' }}" 
+                                id="budgetNumber" 
+                                placeholder="budgetNumber" 
+                                autocomplete="off"
+                                disabled
+                            >
+                            <label for="budgetNumber">Nº Orçamento</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-floating">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                value="{{ certificate }}" 
+                                id="certificate" 
+                                placeholder="certificate" 
+                                autocomplete="off"
+                                disabled 
+                            >
+                            <label for="certificate">Certificado</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-floating">
+                            <input 
+                                type="date" 
+                                class="form-control" 
+                                value="{{ date_today | date:'Y-m-d' }}" 
+                                id="emissionDate" 
+                                placeholder="emissionDate" 
+                                autocomplete="off" 
+                                disabled
+                            >
+                            <label for="emissionDate">Data Emissão</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-floating">
+                            <input 
+                                type="date" 
+                                class="form-control" 
+                                value="{{ date_validity | date:'Y-m-d' }}" 
+                                id="validity" 
+                                placeholder="validity" 
+                                autocomplete="off" 
+                            >
+                            <label for="validity">Data Validade</label>
+                        </div>
+                    </div>
+
+
+                    
+                    <div class="col-md-12">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="description" id="description" style="height: 220px">{{ client.observation }}</textarea>
+                            <label for="description">Descrição</label>
+                          </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer mb-4">
+                <div class="d-grid gap-2 col-8 col-md-5 mx-auto">
+                    <button class="btn btn-success btn-lg btn-rounded" onclick="client_update('{{ client.id }}')" type="button">
+                        <i class="fa-solid fa-floppy-disk"></i> Salvar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<script>
+    const AXIOS_URL = '{{ AXIOS_URL }}'
+
+    $("#clientName").keyup(function(){
+        var find = $(this).val()
+        
+        axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+        axios.defaults.xsrfCookieName = "csrftoken";
+        axios.get(AXIOS_URL+`/client/${find}`, {})
+        .then(res => {
+            var data = res.data
+            console.log(data);
+            if(data.success){
+                var clients = data.clientList
+                if(clients.length){
+                    clients.forEach(client => {
+                        console.log(client);
+                    });
+                }else{
+                    console.log('nada encontrado');
+                }
+            }
+        })
+
+    })
+
+</script> 
+{% endblock script %}

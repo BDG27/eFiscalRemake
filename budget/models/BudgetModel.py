@@ -17,4 +17,4 @@ class Budget(models.Model):
 
     class Meta:
         verbose_name = "Orçamento"
-        verbose_name_plural = "Orçmentos"
+        verbose_name_plural = "Orçamentos"

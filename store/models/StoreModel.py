@@ -23,7 +23,7 @@ class Store(models.Model):
     terms = models.TextField('Termos', null=True) 
     status = models.CharField(max_length=50, choices=Status.choices, default=Status.ATIVO)   
     paymentStatus = models.CharField(max_length=50, choices=PaymentStatus.choices, default=PaymentStatus.PAGO) 
-    user = models.ForeignKey(User, null=False, on_delete=models.RESTRICT)
+    user = models.OneToOneField(User, null=False, on_delete=models.RESTRICT)
 
     def __str__(self):
         return self.brandName
