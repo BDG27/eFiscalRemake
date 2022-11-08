@@ -33,8 +33,17 @@ class ClientView():
             try:
                 clients = Client.objects.filter(corporateName__icontains=name)
                 clientList = []
-                for client in clients:
-                    clientList.append({"id": client.id, "name": client.corporateName})
+                if(len(clients) > 0):
+                    for client in clients:
+                        address = ''
+                        if(client.street != None and client.number != None and client.district != None and client.city != None and client.state != None):
+                            address = '{}, {} - {} - {}/{}'.format(client.street, client.number, client.district, client.city, client.state)
+                        clientList.append({
+                            "id": client.id, 
+                            "name": client.corporateName,
+                            "document": client.document,
+                            "address": address
+                        })
 
                 return JsonResponse({"success": True, "clientList": clientList})
             except Exception as error:

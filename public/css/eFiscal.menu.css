@@ -20,22 +20,34 @@ a{
     margin: 0;
     padding: 0;
 }
-.groupSelect{
+.searchboxList{
     background-color: rgb(109, 109, 109);
-    height: 250px;
+    height: 0;
     max-height: 250px;
     width: 100%;
     position: absolute;
     z-index: 999;
     overflow: auto;
+    border: solid 1px #bdbdbd;
+    border-top: none !important;
+    display: none;
+    border-radius: 0 0 0.25rem 0.25rem;
 }
-.groupSelect-item{
+.searchboxList-focus-remove{
+    border: solid 1px #bdbdbd !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+.searchboxList-item{
     background-color: white;
     padding: 10px 20px;
     user-select: none;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
 }
 
-.groupSelect-item:hover{
+.searchboxList-item:hover{
     background-color: #e9e9e9;
 }
 

@@ -15,6 +15,9 @@ class Budget(models.Model):
     status = models.CharField(max_length=50, choices=Status.choices, default=Status.EM_NEGOCIACAO)
     store = models.ForeignKey(Store, null=False, verbose_name='Loja', on_delete=models.RESTRICT)
 
+    def __str__(self):
+        return str(self.number) + ' - ' + str(self.store.corporateName)
+
     class Meta:
         verbose_name = "Orçamento"
         verbose_name_plural = "Orçamentos"

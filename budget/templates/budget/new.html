@@ -63,7 +63,7 @@
         <div class="card mb-3 shadow-4-strong">
             <div class="card-header">
                 <h1 class="display-1 eFiscal-container-form-title">
-                    <i class="fa-solid fa-user"></i> Dados do Cliente
+                    <i class="fa-solid fa-user"></i> Dados Cliente
                 </h1>
             </div>
             <div class="card-body">
@@ -78,47 +78,7 @@
                                 autocomplete="off"
                             >
                             <label for="clientName">Nome Cliente</label>
-                            <div class="groupSelect">
-                                <div class="groupSelect-item">
-                                    <i class="fa-solid fa-user"></i> Alvaro
-                                </div>
-                                <div class="groupSelect-item">
-                                    <i class="fa-solid fa-user"></i> Alvaro
-                                </div>
-                                <div class="groupSelect-item">
-                                    <i class="fa-solid fa-user"></i> Alvaro
-                                </div>
-                                <div class="groupSelect-item">
-                                    <i class="fa-solid fa-user"></i> Alvaro
-                                </div>
-                                <div class="groupSelect-item">
-                                    <i class="fa-solid fa-user"></i> Alvaro
-                                </div>
-                                <div class="groupSelect-item">
-                                    <i class="fa-solid fa-user"></i> Alvaro
-                                </div>
-                                <div class="groupSelect-item">
-                                    <i class="fa-solid fa-user"></i> Alvaro
-                                </div>
-                                <div class="groupSelect-item">
-                                    <i class="fa-solid fa-user"></i> Alvaro
-                                </div>
-                                <div class="groupSelect-item">
-                                    <i class="fa-solid fa-user"></i> Alvaro
-                                </div>
-                                <div class="groupSelect-item">
-                                    <i class="fa-solid fa-user"></i> Alvaro
-                                </div>
-                                <div class="groupSelect-item">
-                                    <i class="fa-solid fa-user"></i> Alvaro
-                                </div>
-                                <div class="groupSelect-item">
-                                    <i class="fa-solid fa-user"></i> Alvaro
-                                </div>
-                                <div class="groupSelect-item">
-                                    <i class="fa-solid fa-user"></i> Alvaro
-                                </div>
-                            </div>
+                            <div class="searchboxList" id="clientListSearch"></div>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -151,15 +111,15 @@
             </div>
         </div>
         <!-- Dados do orçamento -->
-        <div class="card shadow-4-strong">
+        <div class="card mb-3 shadow-4-strong">
             <div class="card-header">
                 <h1 class="display-1 eFiscal-container-form-title">
-                    <i class="fa-solid fa-file-invoice"></i> Novo Orçamento
+                    <i class="fa-solid fa-file-invoice"></i> Dados Orçamento
                 </h1>
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-4 mb-3">
                         <div class="form-floating">
                             <input 
                                 type="text" 
@@ -173,21 +133,7 @@
                             <label for="budgetNumber">Nº Orçamento</label>
                         </div>
                     </div>
-                    <div class="col-md-3 mb-3">
-                        <div class="form-floating">
-                            <input 
-                                type="text" 
-                                class="form-control" 
-                                value="{{ certificate }}" 
-                                id="certificate" 
-                                placeholder="certificate" 
-                                autocomplete="off"
-                                disabled 
-                            >
-                            <label for="certificate">Certificado</label>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-4 mb-3">
                         <div class="form-floating">
                             <input 
                                 type="date" 
@@ -201,7 +147,7 @@
                             <label for="emissionDate">Data Emissão</label>
                         </div>
                     </div>
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-4 mb-3">
                         <div class="form-floating">
                             <input 
                                 type="date" 
@@ -214,14 +160,25 @@
                             <label for="validity">Data Validade</label>
                         </div>
                     </div>
-
-
-                    
-                    <div class="col-md-12">
+                    <div class="col-md-12 mb-3">
                         <div class="form-floating">
-                            <textarea class="form-control" placeholder="description" id="description" style="height: 220px">{{ client.observation }}</textarea>
-                            <label for="description">Descrição</label>
+                            <textarea class="form-control" placeholder="terms" id="terms" style="height: 220px">{{ store.terms }}</textarea>
+                            <label for="terms">Descrição</label>
                           </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="form-floating">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                value="{{ certificate }}" 
+                                id="certificate" 
+                                placeholder="certificate" 
+                                autocomplete="off"
+                                disabled 
+                            >
+                            <label for="certificate">Certificado</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -230,6 +187,57 @@
                     <button class="btn btn-success btn-lg btn-rounded" onclick="client_update('{{ client.id }}')" type="button">
                         <i class="fa-solid fa-floppy-disk"></i> Salvar
                     </button>
+                </div>
+            </div>
+        </div>
+        <!-- Itens do orçamento -->
+        <div class="card mb-3 shadow-4-strong">
+            <div class="card-header">
+                <h1 class="display-1 eFiscal-container-form-title">
+                    <i class="fa-solid fa-box"></i> Produtos
+                </h1>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="clientName" 
+                                placeholder="clientName" 
+                                autocomplete="off"
+                            >
+                            <label for="clientName">Nome Cliente</label>
+                            <div class="searchboxList" id="clientListSearch"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="clientDocument" 
+                                placeholder="clientDocument" 
+                                autocomplete="off"
+                                disabled 
+                            >
+                            <label for="clientDocument">CPF/CNPJ</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="form-floating">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="clientAddress" 
+                                placeholder="clientAddress" 
+                                autocomplete="off"
+                                disabled 
+                            >
+                            <label for="clientAddress">Endereço</label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -242,28 +250,85 @@
 <script>
     const AXIOS_URL = '{{ AXIOS_URL }}'
 
+    $(document).on('click', '.searchboxList-item', function(){
+        var clientId = $(this).data('id')
+        var clientName = $(this).data('name')
+        var clientDocument = $(this).data('document')
+        var clientAddress= $(this).data('address')
+        var clientInput = $('#clientName')
+        var content = $('#clientListSearch')
+        var searchList = $('.searchboxList')
+
+        clientInput.val(clientName)
+        $('#clientDocument').val(clientDocument)
+        $('#clientAddress').val(clientAddress)
+        clientInput.attr('data-id', `${clientId}`)
+        content.html('')
+        searchList.css('display', 'none')
+        clientInput.removeClass('searchboxList-focus-remove')
+        clientInput.css('border-radius', '0.25rem')
+        clientInput.css('border', 'solid 1px #bdbdbd')
+    })
+
     $("#clientName").keyup(function(){
         var find = $(this).val()
-        
-        axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-        axios.defaults.xsrfCookieName = "csrftoken";
-        axios.get(AXIOS_URL+`/client/${find}`, {})
-        .then(res => {
-            var data = res.data
-            console.log(data);
-            if(data.success){
-                var clients = data.clientList
-                if(clients.length){
-                    clients.forEach(client => {
-                        console.log(client);
-                    });
-                }else{
-                    console.log('nada encontrado');
-                }
-            }
-        })
+        var content = $('#clientListSearch')
+        var searchList = $('.searchboxList')
+        var clientName = $('#clientName')
 
+        if(find.length > 0){
+            axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+            axios.defaults.xsrfCookieName = "csrftoken";
+            axios.get(AXIOS_URL+`/client/${find}`, {})
+            .then(res => {
+                var data = res.data
+                if(data.success){
+                    var clients = data.clientList
+                    if(clients.length > 0){
+                        var item = ''
+                        searchList.css('height', 'auto')
+                        searchList.css('display', 'block')
+                        clientName.css('border-radius', '0.25rem 0.25rem 0 0')
+                        clientName.addClass('searchboxList-focus-remove')
+                        clients.forEach(client => {
+                            item += `
+                                <div 
+                                    class="searchboxList-item" 
+                                    id="searchboxList-item-${client.id}" 
+                                    data-id="${client.id}" 
+                                    data-name="${client.name}"
+                                    data-document="${client.document}"
+                                    data-address="${client.address}"
+                                >
+                                    <i class="fa-solid fa-user"></i> ${client.name}
+                                </div>
+                            `
+                        })
+                        content.html('')
+                        content.html(item)
+                    }else{
+                        searchList.css('height', 'auto')
+                        searchList.css('display', 'block')
+                        item = `
+                            <div class="searchboxList-item" id="searchboxList-item-0" data-id="0" >
+                                <i class="fa-solid fa-user"></i> Nada encontrado
+                            </div>
+                        `
+                        content.html('')
+                        content.html(item)
+                    }
+                }
+            })
+        } else {
+            content.html('')
+            searchList.css('display', 'none')
+            clientName.removeClass('searchboxList-focus-remove')
+            clientName.css('border-radius', '0.25rem')
+        }
+        
     })
+
+
 
 </script> 
 {% endblock script %}

@@ -19,6 +19,9 @@ class Client(models.Model):
     status = models.CharField(max_length=50, choices=Status.choices, default=Status.ATIVO) 
     store = models.ForeignKey(Store, null=False, verbose_name='Loja', on_delete=models.RESTRICT)
 
+    def __str__(self):
+        return self.corporateName
+
     class Meta:
         verbose_name = "Cliente"
         verbose_name_plural = "Clientes"
