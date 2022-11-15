@@ -5,6 +5,7 @@ from core.views import UtilsView
 from store.models import Store
 from uuid import uuid4
 from datetime import datetime, timedelta
+from ..models import Measurement
 import os
 
 CEO = UtilsView.CEO()
@@ -21,6 +22,7 @@ class BudgetView():
                         "pageTitle": CEO['CEO']['pageTitle']+"Novo orçamento"
                     },
                     "store": store,
+                    "measurements": Measurement.choices,
                     "certificate": uuid4(),
                     'date_today': datetime.now(),
                     'date_validity': datetime.now()+timedelta(days=7),

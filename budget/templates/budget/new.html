@@ -110,6 +110,21 @@
                 </div>
             </div>
         </div>
+        <!-- Itens do orçamento -->
+        <div class="card mb-3 shadow-4-strong">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h1 class="display-1 eFiscal-container-form-title">
+                    <i class="fa-solid fa-box"></i> Produtos
+                </h1>
+                <div class="col-md-1 d-flex justify-content-center align-items-center">
+                    <!-- <button type="button" class="btn btn-success btn-floating" onclick="addProduct()"> -->
+                    <button type="button" class="btn btn-success btn-floating" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body" id="content-product-list"></div>
+        </div>
         <!-- Dados do orçamento -->
         <div class="card mb-3 shadow-4-strong">
             <div class="card-header">
@@ -189,56 +204,67 @@
                     </button>
                 </div>
             </div>
-        </div>
-        <!-- Itens do orçamento -->
-        <div class="card mb-3 shadow-4-strong">
-            <div class="card-header">
-                <h1 class="display-1 eFiscal-container-form-title">
-                    <i class="fa-solid fa-box"></i> Produtos
-                </h1>
+        </div>       
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-box"></i> Novo Produto</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="card-body">
+            <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <div class="form-floating">
-                            <input 
-                                type="text" 
-                                class="form-control" 
-                                id="clientName" 
-                                placeholder="clientName" 
-                                autocomplete="off"
-                            >
-                            <label for="clientName">Nome Cliente</label>
-                            <div class="searchboxList" id="clientListSearch"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="form-floating">
-                            <input 
-                                type="text" 
-                                class="form-control" 
-                                id="clientDocument" 
-                                placeholder="clientDocument" 
-                                autocomplete="off"
-                                disabled 
-                            >
-                            <label for="clientDocument">CPF/CNPJ</label>
-                        </div>
-                    </div>
                     <div class="col-md-12 mb-3">
-                        <div class="form-floating">
+                        <div class="form-outline">
+                            <input type="text" id="productDescription" autocomplete="off" class="form-control form-control-lg" />
+                            <label class="form-label" for="productDescription">Descrição do Produto</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-outline">
+                            <input type="text" id="productUnityValue" autocomplete="off" class="form-control form-control-lg" />
+                            <label class="form-label" for="productUnityValue">Valor unitário</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-outline">
                             <input 
                                 type="text" 
-                                class="form-control" 
-                                id="clientAddress" 
-                                placeholder="clientAddress" 
+                                id="productMeasurements" 
+                                class="form-control form-control-lg" 
                                 autocomplete="off"
-                                disabled 
-                            >
-                            <label for="clientAddress">Endereço</label>
+                                list="datalistOptions" 
+                                value="{{ measurements.0.1 }}"
+                            />
+                            <label class="form-label" for="productMeasurements">Unidade de medida</label>
+                        </div>
+                        <datalist id="datalistOptions">
+                            {% for measurement in measurements %}
+                                <option value="{{ measurement.1 }}">
+                            {% endfor %}
+                        </datalist>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-outline">
+                            <input type="text" id="productQuantity" autocomplete="off" class="form-control form-control-lg" />
+                            <label class="form-label" for="productQuantity">Quantidade</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-outline">
+                            <input type="text" id="productAmount" autocomplete="off" class="form-control form-control-lg" />
+                            <label class="form-label" for="productAmount">Valor Total</label>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="addProduct()">Adicionar</button>
             </div>
         </div>
     </div>
@@ -249,6 +275,13 @@
 {% block script %}
 <script>
     const AXIOS_URL = '{{ AXIOS_URL }}'
+    const UTILS = new Utils()
+
+    $(document).ready(function(){
+        $('#productUnityValue').mask("#.##0,00", {reverse: true});
+        $('#productAmount').mask("#.##0,00", {reverse: true});
+        $('#productQuantity').mask('0#');
+    })
 
     $(document).on('click', '.searchboxList-item', function(){
         var clientId = $(this).data('id')
@@ -328,6 +361,84 @@
         
     })
 
+    $('#productUnityValue').keyup(function(){
+        var valorUnitario = UTILS.numberToString($(this).val())
+        var quantidade = $('#productQuantity').val()
+        var valorTotal = $('#productAmount')
+
+        if(String(valorUnitario).length > 0 && quantidade.length > 0){
+            valorTotal.focus()
+            var total = valorUnitario * parseFloat(quantidade)
+            valorTotal.val(total)
+        }
+    })
+    $('#productQuantity').keyup(function(){
+        var quantidade = $(this).val()
+        var valorUnitario = UTILS.numberToString($('#productUnityValue').val())
+        var valorTotal = $('#productAmount')
+        
+        if(String(valorUnitario).length > 0 && quantidade.length > 0){
+            valorTotal.focus()
+            var total = valorUnitario * parseFloat(quantidade)
+            valorTotal.val(total)
+        }
+    })
+
+    var productRowId = 1
+    function addProduct(){
+        var descricao = $('#productDescription').val()
+        var valorUnitario = $('#productUnityValue').val()
+        var unidadeMedida = $('#productMeasurements').val()
+        var quantidade = $('#productQuantity').val()
+        var valorTotal = $('#productAmount').val()
+
+        if(descricao.length > 0 && valorUnitario.length > 0 && unidadeMedida.length > 0 &&quantidade.length > 0 && valorTotal.length > 0){
+            var content = $('#content-product-list')
+
+            content.prepend(`
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <div class="form-outline">
+                            <input type="text" id="productDescription-${productRowId}" autocomplete="off" class="form-control form-control-lg" />
+                            <label class="form-label" for="productDescription-${productRowId}">Descrição do Produto</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-outline">
+                            <input type="text" id="productUnityValue-${productRowId}" autocomplete="off" class="form-control form-control-lg" />
+                            <label class="form-label" for="productUnityValue-${productRowId}">Valor unitário</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-outline">
+                            <input 
+                                type="text" 
+                                id="productMeasurements-${productRowId}" 
+                                class="form-control form-control-lg" 
+                                autocomplete="off"
+                                value="{{ measurements.0.1 }}"
+                            />
+                            <label class="form-label" for="productMeasurements-${productRowId}">Unidade de medida</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-outline">
+                            <input type="text" id="productQuantity-${productRowId}" autocomplete="off" class="form-control form-control-lg" />
+                            <label class="form-label" for="productQuantity-${productRowId}">Quantidade</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-outline">
+                            <input type="text" id="productAmount-${productRowId}" autocomplete="off" class="form-control form-control-lg" />
+                            <label class="form-label" for="productAmount-${productRowId}">Valor Total</label>
+                        </div>
+                    </div>
+                </div>
+            `)
+            productRowId++
+        }
+
+    }
 
 
 </script> 
